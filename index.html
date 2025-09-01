@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>우리 가족 3-2-1 생각 다리 (반응형)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 min-h-screen">
+    <div class="main-container" id="capture-area">
+        <!-- 헤더 - 1페이지 -->
+        <header class="text-center mb-4 md:mb-6 bg-white rounded-2xl md:rounded-3xl shadow-lg p-4 md:p-6 print-page-1">
+            <h1 class="title-font text-2xl md:text-4xl text-purple-600 mb-2">
+                <span class="emoji-bounce">🏠</span> 우리 가족 3-2-1 생각 다리 <span class="emoji-bounce">💝</span>
+            </h1>
+            <p class="text-gray-600 text-base md:text-lg">돼지책을 읽고 우리 가족에 대한 생각 변화 기록하기</p>
+        </header>
+
+        <!-- 학생 정보 - 1페이지 -->
+        <section class="bg-white rounded-xl md:rounded-2xl shadow-md p-3 md:p-4 mb-4 md:mb-6 print-page-1">
+            <div class="flex flex-wrap items-center justify-center gap-3 md:gap-6">
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-xl md:text-2xl">🎒</span>
+                    <label class="font-bold text-gray-700 text-sm md:text-base">학년:</label>
+                    <input type="text" id="grade" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center" value="3">
+                </div>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-xl md:text-2xl">🏫</span>
+                    <label class="font-bold text-gray-700 text-sm md:text-base">반:</label>
+                    <input type="text" id="class" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center">
+                </div>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-xl md:text-2xl">📝</span>
+                    <label class="font-bold text-gray-700 text-sm md:text-base">번호:</label>
+                    <input type="text" id="number" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center">
+                </div>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-xl md:text-2xl">👦</span>
+                    <label class="font-bold text-gray-700 text-sm md:text-base">이름:</label>
+                    <input type="text" id="name" class="w-20 md:w-24 px-2 py-1 border-2 border-purple-300 rounded-lg">
+                </div>
+            </div>
+        </section>
+
+        <!-- 오늘의 주제 - 1페이지 -->
+        <section class="cute-box mb-4 md:mb-6 print-page-1">
+            <div class="cute-box-inner">
+                <h2 class="title-font text-xl md:text-2xl text-purple-600 mb-3 text-center">
+                    <span class="text-2xl md:text-3xl">📖</span> 오늘의 주제
+                </h2>
+                <div class="flex gap-2 md:gap-3 justify-center flex-wrap mb-3">
+                    <button onclick="setTopic('우리 가족이 함께 하는 일')" class="choice-btn text-sm md:text-base bg-purple-100 border-2 border-purple-300 rounded-full hover:bg-purple-200">
+                        우리 가족이 함께 하는 일
+                    </button>
+                    <button onclick="setTopic('가족이 나를 위해 하는 일')" class="choice-btn text-sm md:text-base bg-purple-100 border-2 border-purple-300 rounded-full hover:bg-purple-200">
+                        가족이 나를 위해 하는 일
+                    </button>
+                    <button onclick="setTopic('행복한 가족이란?')" class="choice-btn text-sm md:text-base bg-purple-100 border-2 border-purple-300 rounded-full hover:bg-purple-200">
+                        행복한 가족이란?
+                    </button>
+                </div>
+                <input type="text" id="topic" class="w-full px-3 md:px-4 py-2 border-2 border-purple-300 rounded-lg text-center text-base md:text-lg font-bold" 
+                    placeholder="주제를 선택하거나 직접 써보세요">
+            </div>
+        </section>
+
+        <!-- 메인 콘텐츠 - 1페이지 -->
+        <main class="responsive-grid mb-4 md:mb-6 print-page-1">
+            <!-- 돼지책 읽기 전 -->
+            <section class="bg-yellow-50 rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 border-2 md:border-3 border-yellow-200">
+                <h2 class="title-font text-xl md:text-2xl text-orange-600 mb-3 md:mb-4 text-center">
+                    <span class="text-2xl md:text-3xl">📚</span> 돼지책 읽기 전
+                </h2>
+                
+                <!-- 3 단어 -->
+                <div class="mb-3 md:mb-4">
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">1️⃣</span> 떠오르는 단어 3개
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <div class="words-container">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg" placeholder="첫 번째 단어" data-field="before-word-1">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg" placeholder="두 번째 단어" data-field="before-word-2">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg" placeholder="세 번째 단어" data-field="before-word-3">
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 엄마, 집안일, 요리</div>
+                    </div>
+                </div>
+
+                <!-- 2 질문 -->
+                <div class="mb-3 md:mb-4">
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">2️⃣</span> 궁금한 것 2가지
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <input type="text" class="w-full mb-2 px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg" 
+                            placeholder="첫 번째 궁금한 점" data-field="before-question-1">
+                        <input type="text" class="w-full px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg" 
+                            placeholder="두 번째 궁금한 점" data-field="before-question-2">
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 왜 엄마만 요리를 할까?</div>
+                    </div>
+                </div>
+
+                <!-- 1 비유 (쉽게) -->
+                <div>
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">3️⃣</span> 우리 가족은 _____ 같아요
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-sm md:text-lg">우리 가족은</span>
+                            <input type="text" class="flex-1 min-w-[100px] px-2 md:px-3 py-1 md:py-2 border-2 border-yellow-300 rounded-lg text-center" 
+                                placeholder="무엇" data-field="before-metaphor">
+                            <span class="text-sm md:text-lg">같아요</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 기차, 나무, 퍼즐</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 돼지책 읽은 후 -->
+            <section class="bg-green-50 rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 border-2 md:border-3 border-green-200">
+                <h2 class="title-font text-xl md:text-2xl text-green-600 mb-3 md:mb-4 text-center">
+                    <span class="text-2xl md:text-3xl">📖</span> 돼지책 읽은 후
+                </h2>
+                
+                <!-- 3 단어 -->
+                <div class="mb-3 md:mb-4">
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">1️⃣</span> 새로 생각난 단어 3개
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <div class="words-container">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg" placeholder="첫 번째 단어" data-field="after-word-1">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg" placeholder="두 번째 단어" data-field="after-word-2">
+                            <input type="text" class="px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg" placeholder="세 번째 단어" data-field="after-word-3">
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 협력, 감사, 도움</div>
+                    </div>
+                </div>
+
+                <!-- 2 질문 -->
+                <div class="mb-3 md:mb-4">
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">2️⃣</span> 새로운 궁금증 2가지
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <input type="text" class="w-full mb-2 px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg" 
+                            placeholder="첫 번째 궁금한 점" data-field="after-question-1">
+                        <input type="text" class="w-full px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg" 
+                            placeholder="두 번째 궁금한 점" data-field="after-question-2">
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 내가 도울 수 있는 일은 뭘까?</div>
+                    </div>
+                </div>
+
+                <!-- 1 비유 (쉽게) -->
+                <div>
+                    <h3 class="font-bold text-base md:text-lg mb-2 text-gray-800">
+                        <span class="text-lg md:text-xl">3️⃣</span> 우리 가족은 _____ 같아요
+                    </h3>
+                    <div class="bg-white rounded-lg p-2 md:p-3">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-sm md:text-lg">우리 가족은</span>
+                            <input type="text" class="flex-1 min-w-[100px] px-2 md:px-3 py-1 md:py-2 border-2 border-green-300 rounded-lg text-center" 
+                                placeholder="무엇" data-field="after-metaphor">
+                            <span class="text-sm md:text-lg">같아요</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1">💡 예시: 한 팀, 무지개, 정원</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- 인쇄용 페이지 구분선 -->
+        <div class="page-break no-screen"></div>
+
+        <!-- Bridge: 생각의 변화 (초3 버전) - 2페이지 시작 -->
+        <section class="cute-box mb-4 md:mb-6 print-page-2 bridge-section">
+            <div class="cute-box-inner bg-gradient-to-r from-blue-50 to-purple-50">
+                <h2 class="title-font text-xl md:text-2xl text-purple-600 mb-3 md:mb-4 text-center">
+                    <span class="text-2xl md:text-3xl">🌈</span> 나의 생각 변화
+                </h2>
+                
+                <!-- 문장 완성형 선택지 -->
+                <div class="bg-white rounded-lg p-3 md:p-4 mb-3">
+                    <p class="font-bold mb-2 md:mb-3 text-sm md:text-base">아래 문장을 완성해보세요:</p>
+                    <div class="space-y-2 md:space-y-3">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="font-semibold text-sm md:text-base">처음에는</span>
+                            <input type="text" class="flex-1 min-w-[150px] md:min-w-[200px] px-2 md:px-3 py-1 md:py-2 border-2 border-purple-300 rounded-lg text-sm md:text-base" 
+                                placeholder="(예: 엄마가 당연히 집안일을 한다고)" data-field="bridge-before">
+                            <span class="font-semibold text-sm md:text-base">생각했어요.</span>
+                        </div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="font-semibold text-sm md:text-base">하지만 이제는</span>
+                            <input type="text" class="flex-1 min-w-[150px] md:min-w-[200px] px-2 md:px-3 py-1 md:py-2 border-2 border-purple-300 rounded-lg text-sm md:text-base" 
+                                placeholder="(예: 모두가 함께 도와야 한다고)" data-field="bridge-after">
+                            <span class="font-semibold text-sm md:text-base">생각해요.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 느낌 선택 -->
+                <div class="bg-white rounded-lg p-3 md:p-4">
+                    <p class="font-bold mb-2 md:mb-3 text-sm md:text-base">돼지책을 읽고 난 느낌은? (클릭해서 선택)</p>
+                    <div class="flex gap-2 md:gap-3 justify-center flex-wrap">
+                        <button onclick="selectFeeling(this, '😊')" class="choice-btn text-2xl md:text-4xl p-1 md:p-2 bg-yellow-100 rounded-lg border-2 border-yellow-300">😊</button>
+                        <button onclick="selectFeeling(this, '🤔')" class="choice-btn text-2xl md:text-4xl p-1 md:p-2 bg-yellow-100 rounded-lg border-2 border-yellow-300">🤔</button>
+                        <button onclick="selectFeeling(this, '😮')" class="choice-btn text-2xl md:text-4xl p-1 md:p-2 bg-yellow-100 rounded-lg border-2 border-yellow-300">😮</button>
+                        <button onclick="selectFeeling(this, '💝')" class="choice-btn text-2xl md:text-4xl p-1 md:p-2 bg-yellow-100 rounded-lg border-2 border-yellow-300">💝</button>
+                        <button onclick="selectFeeling(this, '🤗')" class="choice-btn text-2xl md:text-4xl p-1 md:p-2 bg-yellow-100 rounded-lg border-2 border-yellow-300">🤗</button>
+                    </div>
+                    <input type="hidden" id="selected-feeling" data-field="feeling">
+                </div>
+            </div>
+        </section>
+
+        <!-- 그림 그리기 / 사진 업로드 섹션 - 2페이지 -->
+        <section class="bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6 mb-4 md:mb-6 print-page-2">
+            <h2 class="title-font text-xl md:text-2xl text-purple-600 mb-3 md:mb-4 text-center">
+                <span class="text-2xl md:text-3xl">🎨</span> 우리 가족이 함께하는 모습
+            </h2>
+            
+            <!-- 모드 선택 버튼 -->
+            <div class="flex gap-2 justify-center mb-3 no-print">
+                <button onclick="setMode('draw')" id="drawModeBtn" class="mode-btn selected px-3 md:px-4 py-1 md:py-2 bg-purple-500 text-white rounded-lg text-sm md:text-base font-semibold transition">
+                    ✏️ 그림 그리기
+                </button>
+                <button onclick="setMode('photo')" id="photoModeBtn" class="mode-btn px-3 md:px-4 py-1 md:py-2 bg-gray-300 text-gray-700 rounded-lg text-sm md:text-base font-semibold transition">
+                    📷 사진 올리기
+                </button>
+            </div>
+            
+            <!-- 그림 그리기 영역 -->
+            <div class="drawing-area" id="drawing-container">
+                <canvas id="drawingCanvas" class="drawing-canvas" width="700" height="200"></canvas>
+                <div class="absolute top-2 right-2 flex gap-2 no-print" id="drawingControls">
+                    <button onclick="clearCanvas()" class="px-2 md:px-3 py-1 bg-red-500 text-white rounded-lg text-xs md:text-sm hover:bg-red-600">
+                        지우기
+                    </button>
+                    <input type="color" id="colorPicker" value="#000000" class="w-8 md:w-10 h-6 md:h-8 rounded cursor-pointer">
+                </div>
+            </div>
+            
+            <!-- 사진 업로드 영역 -->
+            <div class="photo-area hidden" id="photo-container">
+                <div class="border-3 border-dashed border-purple-300 rounded-xl p-4 md:p-8 text-center bg-purple-50 min-h-[200px] relative">
+                    <input type="file" id="photoInput" accept="image/*" class="hidden" onchange="handlePhotoUpload(event)">
+                    
+                    <!-- 업로드 전 안내 -->
+                    <div id="uploadPrompt" class="upload-prompt">
+                        <div class="text-4xl md:text-5xl mb-3">📸</div>
+                        <p class="text-base md:text-lg font-semibold text-purple-700 mb-2">가족 사진을 올려주세요</p>
+                        <button onclick="document.getElementById('photoInput').click()" 
+                            class="px-4 md:px-6 py-2 bg-purple-500 text-white rounded-lg font-bold hover:bg-purple-600 transition">
+                            사진 선택하기
+                        </button>
+                        <p class="text-xs md:text-sm text-gray-500 mt-2">JPG, PNG 파일을 올릴 수 있어요</p>
+                    </div>
+                    
+                    <!-- 업로드된 사진 표시 영역 -->
+                    <div id="photoPreview" class="hidden">
+                        <img id="uploadedPhoto" src="" alt="가족 사진" class="max-w-full max-h-[400px] mx-auto rounded-lg shadow-md">
+                        <div class="mt-3 no-print">
+                            <button onclick="removePhoto()" class="px-3 py-1 bg-red-500 text-white rounded-lg text-sm hover:bg-red-600">
+                                사진 제거
+                            </button>
+                            <button onclick="document.getElementById('photoInput').click()" class="px-3 py-1 bg-purple-500 text-white rounded-lg text-sm hover:bg-purple-600 ml-2">
+                                다른 사진 선택
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 완료 스탬프 섹션 - 화면 전용 -->
+        <section class="text-center mb-4 md:mb-6 no-print">
+            <button onclick="completeWorksheet()" class="px-6 md:px-8 py-2 md:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-lg md:text-xl font-bold hover:from-purple-600 hover:to-pink-600 transform transition hover:scale-105 shadow-lg">
+                <span class="text-xl md:text-2xl">🎉</span> 완성했어요! <span class="text-xl md:text-2xl">🎉</span>
+            </button>
+        </section>
+
+        <!-- 버튼 영역 -->
+        <footer class="no-print bg-white rounded-xl md:rounded-2xl shadow-lg p-4 md:p-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+                <button onclick="saveAsImage()" class="px-4 md:px-6 py-2 md:py-3 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 flex items-center justify-center gap-2">
+                    <span class="text-lg md:text-xl">📸</span> 사진으로 저장
+                </button>
+                <button onclick="printWorksheet()" class="px-4 md:px-6 py-2 md:py-3 bg-blue-500 text-white rounded-lg font-bold hover:bg-blue-600 flex items-center justify-center gap-2">
+                    <span class="text-lg md:text-xl">🖨️</span> 인쇄하기 (2쪽)
+                </button>
+                <button onclick="resetAll()" class="px-4 md:px-6 py-2 md:py-3 bg-gray-500 text-white rounded-lg font-bold hover:bg-gray-600 flex items-center justify-center gap-2">
+                    <span class="text-lg md:text-xl">🔄</span> 다시 쓰기
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 완료 축하 모달 -->
+    <div id="congratsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 text-center transform scale-0 transition-transform max-w-sm w-full" id="congratsContent">
+            <div class="text-5xl md:text-6xl mb-3 md:mb-4">🎊</div>
+            <h2 class="title-font text-2xl md:text-3xl text-purple-600 mb-2">잘했어요!</h2>
+            <p class="text-base md:text-lg text-gray-600 mb-3 md:mb-4">돼지책을 읽고 멋진 생각을 했네요!</p>
+            <button onclick="closeCongratsModal()" class="px-4 md:px-6 py-2 bg-purple-500 text-white rounded-lg font-bold hover:bg-purple-600">
+                확인
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
