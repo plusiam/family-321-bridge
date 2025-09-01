@@ -1,0 +1,498 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 화면에서 페이지 구분선 숨기기 */
+@media screen {
+    .no-screen {
+        display: none !important;
+    }
+}
+
+.title-font {
+    font-family: 'Jua', sans-serif;
+}
+
+/* 컨테이너 최대 너비 설정 */
+.main-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* 반응형 그리드 시스템 */
+.responsive-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* 3개 단어 입력 박스 - 반응형 처리 */
+.words-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+@media (min-width: 480px) {
+    .words-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .words-container input {
+        flex: 1;
+        min-width: calc(33.333% - 0.5rem);
+    }
+}
+
+@media (max-width: 479px) {
+    .words-container input {
+        width: 100%;
+    }
+}
+
+/* 귀여운 박스 스타일 */
+.cute-box {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    padding: 3px;
+    width: 100%;
+}
+
+.cute-box-inner {
+    background: white;
+    border-radius: 17px;
+    padding: 1.25rem;
+}
+
+/* 선택 버튼 스타일 */
+.choice-btn {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 0.5rem 1rem;
+}
+
+.choice-btn:hover {
+    transform: scale(1.05);
+}
+
+.choice-btn.selected {
+    background: #fbbf24;
+    border-color: #f59e0b;
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(251, 191, 36, 0.3);
+}
+
+/* 그림 그리기 영역 */
+.drawing-area {
+    border: 3px dashed #e5e7eb;
+    border-radius: 15px;
+    min-height: 150px;
+    background: #fafafa;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.drawing-canvas {
+    border-radius: 12px;
+    cursor: crosshair;
+    display: block;
+    background: white;
+    width: 100%;
+    touch-action: none;
+}
+
+/* 사진 업로드 영역 */
+.photo-area {
+    width: 100%;
+}
+
+/* 모드 선택 버튼 */
+.mode-btn {
+    transition: all 0.3s ease;
+}
+
+.mode-btn.selected {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+.mode-btn:not(.selected) {
+    background-color: #d1d5db;
+    color: #374151;
+}
+
+.mode-btn:not(.selected):hover {
+    background-color: #9ca3af;
+}
+
+/* 업로드된 이미지 스타일 */
+#uploadedPhoto {
+    object-fit: contain;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 400px;
+}
+
+@media (max-width: 640px) {
+    #uploadedPhoto {
+        max-height: 250px;
+    }
+}
+
+/* 이모지 애니메이션 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.emoji-bounce {
+    animation: bounce 2s infinite;
+    display: inline-block;
+}
+
+/* 스탬프 효과 */
+.stamp {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0;
+    animation: stampEffect 0.5s ease-out forwards;
+}
+
+@keyframes stampEffect {
+    0% { transform: scale(2) rotate(-15deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* 입력 필드 기본 스타일 */
+input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    input[type="text"] {
+        font-size: 1rem;
+    }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 640px) {
+    .main-container {
+        padding: 0.5rem;
+    }
+
+    .title-font {
+        font-size: 1.5rem !important;
+    }
+
+    h2.title-font {
+        font-size: 1.25rem !important;
+    }
+
+    h3 {
+        font-size: 1rem !important;
+    }
+
+    .cute-box-inner {
+        padding: 1rem;
+    }
+
+    .choice-btn {
+        font-size: 0.875rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    footer button {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* 인쇄 스타일 - 2페이지 분할 */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 1.5cm 1cm;
+    }
+
+    @page :first {
+        margin-top: 1cm;
+    }
+
+    @page :left {
+        margin-left: 1.5cm;
+        margin-right: 1cm;
+    }
+
+    @page :right {
+        margin-left: 1cm;
+        margin-right: 1.5cm;
+    }
+
+    body {
+        background: white !important;
+        font-size: 11pt !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .main-container {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* 페이지 분할 클래스 */
+    .page-break {
+        page-break-after: always;
+        break-after: always;
+        display: block !important;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        visibility: hidden;
+    }
+
+    /* 첫 번째 페이지 요소들 */
+    .print-page-1 {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* 두 번째 페이지 요소들 */
+    .print-page-2 {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* 페이지 브레이크 강제 적용 */
+    main.print-page-1 {
+        page-break-after: always !important;
+        break-after: always !important;
+    }
+    
+    /* 2페이지 첫 요소 */
+    .print-page-2.bridge-section {
+        page-break-before: always !important;
+        break-before: always !important;
+        margin-top: 0 !important;
+    }
+
+    /* 헤더 조정 */
+    header {
+        margin-bottom: 0.5cm !important;
+        padding: 0.3cm 0 !important;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    header h1 {
+        font-size: 18pt !important;
+        margin-bottom: 0.2cm !important;
+    }
+
+    header p {
+        font-size: 10pt !important;
+    }
+
+    /* 학생 정보 압축 */
+    .bg-white.rounded-xl.shadow-md {
+        margin-bottom: 0.5cm !important;
+        padding: 0.3cm !important;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+    }
+
+    /* 주제 섹션 압축 */
+    .cute-box {
+        background: white !important;
+        border: 2px solid #666 !important;
+        margin-bottom: 0.5cm !important;
+        padding: 2px !important;
+    }
+
+    .cute-box-inner {
+        padding: 0.3cm !important;
+    }
+
+    .cute-box h2 {
+        font-size: 12pt !important;
+        margin-bottom: 0.2cm !important;
+    }
+
+    /* 메인 그리드 조정 - 1페이지 */
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 0.5cm !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 읽기 전/후 박스 크기 조정 */
+    .bg-yellow-50, .bg-green-50 {
+        padding: 0.4cm !important;
+        border: 1.5px solid #666 !important;
+        background: white !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* 입력 필드 크기 조정 */
+    input[type="text"] {
+        border: 1px solid #999 !important;
+        padding: 1px 3px !important;
+        font-size: 9pt !important;
+        height: 22px !important;
+        line-height: 1.2 !important;
+    }
+
+    /* 단어 입력 박스 조정 - 3개가 한 줄에 */
+    .words-container {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.2cm !important;
+    }
+
+    .words-container input {
+        flex: 1 !important;
+        width: 31% !important;
+        min-width: auto !important;
+    }
+
+    /* 제목 크기 조정 */
+    h2.title-font {
+        font-size: 12pt !important;
+        margin-bottom: 0.2cm !important;
+    }
+
+    h3 {
+        font-size: 10pt !important;
+        margin-bottom: 0.15cm !important;
+        margin-top: 0.1cm !important;
+    }
+
+    /* 예시 텍스트 축소 */
+    .text-xs {
+        font-size: 7pt !important;
+        color: #666 !important;
+        margin-top: 2px !important;
+    }
+
+    /* 생각 변화 섹션 - 2페이지 */
+    .bridge-section {
+        margin-top: 0 !important;
+        margin-bottom: 0.5cm !important;
+    }
+
+    /* 그림/사진 영역 크기 조정 - 2페이지 */
+    .drawing-area, .photo-area {
+        min-height: 120px !important;
+        max-height: 200px !important;
+        page-break-inside: avoid;
+    }
+    
+    #drawingCanvas {
+        max-height: 180px !important;
+        height: 180px !important;
+    }
+    
+    #uploadedPhoto {
+        max-height: 180px !important;
+        width: auto !important;
+        margin: 0 auto !important;
+    }
+
+    /* 느낌 선택 버튼 크기 조정 */
+    .choice-btn {
+        padding: 2px 6px !important;
+        font-size: 9pt !important;
+        margin: 2px !important;
+    }
+
+    /* 이모지 크기 조정 */
+    .text-3xl {
+        font-size: 14pt !important;
+    }
+
+    .text-2xl {
+        font-size: 12pt !important;
+    }
+
+    .text-xl {
+        font-size: 11pt !important;
+    }
+
+    .text-lg {
+        font-size: 10pt !important;
+    }
+
+    /* 라벨 크기 조정 */
+    label {
+        font-size: 9pt !important;
+    }
+
+    /* 버튼 텍스트 크기 */
+    button span {
+        font-size: 9pt !important;
+    }
+
+    /* 여백 조정 */
+    .mb-4, .mb-3 {
+        margin-bottom: 0.2cm !important;
+    }
+
+    .p-4, .p-3 {
+        padding: 0.3cm !important;
+    }
+
+    /* 섹션 배경 및 테두리 */
+    section {
+        box-shadow: none !important;
+    }
+
+    .bg-yellow-50 {
+        background-color: #fffef5 !important;
+    }
+
+    .bg-green-50 {
+        background-color: #f5fff5 !important;
+    }
+
+    /* 모드 선택 버튼 영역 숨기기 */
+    .mode-btn {
+        display: none !important;
+    }
+}
