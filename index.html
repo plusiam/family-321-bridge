@@ -22,28 +22,29 @@
             <p class="text-gray-600 text-base md:text-lg">돼지책을 읽고 우리 가족에 대한 생각 변화 기록하기</p>
         </header>
 
-        <!-- 학생 정보 - 1페이지 (한 줄로 수정) -->
+        <!-- 학생 정보 - 1페이지 (반응형 개선) -->
         <section class="bg-white rounded-xl md:rounded-2xl shadow-md p-3 md:p-4 mb-4 md:mb-6 print-page-1">
-            <div class="flex items-center justify-center gap-2 md:gap-4 overflow-x-auto">
-                <div class="flex items-center gap-1 md:gap-2 flex-shrink-0">
-                    <span class="text-xl md:text-2xl">🎒</span>
+            <!-- 모바일: 2x2 그리드, 태블릿 이상: 한 줄 -->
+            <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-center gap-3 sm:gap-4">
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-lg sm:text-xl md:text-2xl">🎒</span>
                     <label class="font-bold text-gray-700 text-sm md:text-base">학년:</label>
-                    <input type="text" id="grade" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center" value="3">
+                    <input type="text" id="grade" class="w-12 md:w-16 px-1 sm:px-2 py-1 border-2 border-purple-300 rounded-lg text-center text-sm md:text-base" value="3">
                 </div>
-                <div class="flex items-center gap-1 md:gap-2 flex-shrink-0">
-                    <span class="text-xl md:text-2xl">🏫</span>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-lg sm:text-xl md:text-2xl">🏫</span>
                     <label class="font-bold text-gray-700 text-sm md:text-base">반:</label>
-                    <input type="text" id="class" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center">
+                    <input type="text" id="class" class="w-12 md:w-16 px-1 sm:px-2 py-1 border-2 border-purple-300 rounded-lg text-center text-sm md:text-base">
                 </div>
-                <div class="flex items-center gap-1 md:gap-2 flex-shrink-0">
-                    <span class="text-xl md:text-2xl">📝</span>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-lg sm:text-xl md:text-2xl">📝</span>
                     <label class="font-bold text-gray-700 text-sm md:text-base">번호:</label>
-                    <input type="text" id="number" class="w-12 md:w-16 px-2 py-1 border-2 border-purple-300 rounded-lg text-center">
+                    <input type="text" id="number" class="w-12 md:w-16 px-1 sm:px-2 py-1 border-2 border-purple-300 rounded-lg text-center text-sm md:text-base">
                 </div>
-                <div class="flex items-center gap-1 md:gap-2 flex-shrink-0">
-                    <span class="text-xl md:text-2xl">👦</span>
+                <div class="flex items-center gap-1 md:gap-2">
+                    <span class="text-lg sm:text-xl md:text-2xl">👦</span>
                     <label class="font-bold text-gray-700 text-sm md:text-base">이름:</label>
-                    <input type="text" id="name" class="w-20 md:w-24 px-2 py-1 border-2 border-purple-300 rounded-lg">
+                    <input type="text" id="name" class="w-16 sm:w-20 md:w-24 px-1 sm:px-2 py-1 border-2 border-purple-300 rounded-lg text-sm md:text-base">
                 </div>
             </div>
         </section>
